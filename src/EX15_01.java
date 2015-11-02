@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -24,10 +28,17 @@ public  String getCard(Integer index){
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FlowPane pane = new FlowPane();
-		pane.setVgap(5);
-		pane.setHgap(5);
-		pane.setStyle("-fx-background-color: green ");
+		BorderPane bPane = new BorderPane();
+		FlowPane fPane = new FlowPane();
+		HBox h = new HBox(10);
+		h.setAlignment(Pos.CENTER);
+		Button refrButton = new Button("Refresh");
+		h.getChildren().add(refrButton);
+		fPane.setVgap(5);
+		fPane.setHgap(5);
+		fPane.setStyle("-fx-background-color: green ");
+		bPane.setTop(fPane);
+		bPane.setBottom(h);
 		
 		ArrayList<Integer> cards = new ArrayList<>(52);
 		
@@ -37,10 +48,12 @@ public  String getCard(Integer index){
 		
 		for(int i=0;i<4;i++){
 			String image = getCard(cards.get(i));
-			pane.getChildren().add(new ImageView(new Image(image)));
+			fPane.getChildren().add(new ImageView(new Image(image)));
 		}
 		
-		Scene scene = new Scene(pane, 400, 100);
+		
+		
+		Scene scene = new Scene(bPane, 400, 120);
 		primaryStage.setTitle("display cards");
 		primaryStage.setScene(scene);
 		primaryStage.show();
