@@ -51,6 +51,14 @@ public  String getCard(Integer index){
 			fPane.getChildren().add(new ImageView(new Image(image)));
 		}
 		
+		refrButton.setOnAction(e -> {
+			fPane.getChildren().clear();
+			Collections.shuffle(cards);
+			for(int i=0;i<4;i++){
+				String image = getCard(cards.get(i));
+				fPane.getChildren().add(new ImageView(new Image(image)));
+			}
+		});
 		
 		
 		Scene scene = new Scene(bPane, 400, 120);
